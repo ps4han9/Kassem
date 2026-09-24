@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache_1302_1352.appcache">
+<head>
+  <meta charset="utf-8">
+  <title>GAME SHOP Cache Loader 13.02 - 13.52</title>
+  <script>
+    (function () {
+      function notify(type, data) {
+        try {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ source: 'gameshop_cache', type: type, data: data }, '*');
+            if (typeof window.parent.onCacheEvent === 'function') {
+              window.parent.onCacheEvent(type, data);
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (window.applicationCache) {
+        var ac = window.applicationCache;
+        ac.addEventListener('checking', function () { notify('checking'); });
+        ac.addEventListener('downloading', function () { notify('downloading'); });
+        ac.addEventListener('progress', function (e) {
+          notify('progress', { loaded: e.loaded, total: e.total });
+        });
+        ac.addEventListener('cached', function () { notify('cached'); });
+        ac.addEventListener('updateready', function () { notify('updateready'); });
+        ac.addEventListener('noupdate', function () { notify('noupdate'); });
+        ac.addEventListener('error', function (e) { notify('error', e); });
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>

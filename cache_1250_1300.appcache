@@ -1,0 +1,31 @@
+CACHE MANIFEST
+# rev 20260922-gameshop-fw1250-1300-v1
+
+CACHE:
+index.html
+cache_loader_1250_1300.html
+style.css
+gameshop_animated.gif
+icon0.png
+int64.js
+ps4_offsets.js
+core.js
+mem.js
+chain_poops.js
+payload.bin
+patches/1250.bin
+patches/1300.bin
+src/misc.js
+src/loader.js
+src/workers.js
+src/worker.js
+src/netctrl.js
+src/ps4/constants.js
+src/ps4/userland.js
+src/ps4/kernel.js
+
+NETWORK:
+*
+
+FALLBACK:
+/ index.html

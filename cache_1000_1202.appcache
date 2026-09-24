@@ -1,0 +1,36 @@
+CACHE MANIFEST
+# rev 20260922-gameshop-fw1000-1202-v1
+
+CACHE:
+index.html
+cache_loader_1000_1202.html
+style.css
+gameshop_animated.gif
+icon0.png
+int64.js
+ps4_offsets.js
+core.js
+mem.js
+chain_lapse.js
+payload.bin
+patches/1000.bin
+patches/1050.bin
+patches/1100.bin
+patches/1102.bin
+patches/1150.bin
+patches/1200.bin
+src/misc.js
+src/loader.js
+src/workers.js
+src/worker.js
+src/lapse.js
+src/netctrl.js
+src/ps4/constants.js
+src/ps4/userland.js
+src/ps4/kernel.js
+
+NETWORK:
+*
+
+FALLBACK:
+/ index.html

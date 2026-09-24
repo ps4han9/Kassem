@@ -1,0 +1,48 @@
+CACHE MANIFEST
+# rev 20260922-gameshop-unified-v7-clean-ui
+
+index.html
+style.css
+gameshop_animated.gif
+icon0.png
+int64.js
+ps4_offsets.js
+core.js
+mem.js
+jb.js
+chain_poops.js
+chain_lapse.js
+bundle.js
+rpc_worker.js
+payload.bin
+payload2.bin
+goldhen.bin
+patches/600.bin
+patches/620.bin
+patches/650.bin
+patches/670.bin
+patches/700.bin
+patches/750.bin
+patches/800.bin
+patches/850.bin
+patches/900.bin
+patches/903.bin
+patches/950.bin
+patches/1000.bin
+patches/1050.bin
+patches/1100.bin
+patches/1102.bin
+patches/1150.bin
+patches/1200.bin
+patches/1250.bin
+patches/1300.bin
+patches/1302.bin
+patches/1350.bin
+patches/1352.bin
+
+NETWORK:
+*
+
+FALLBACK:
+/ index.html
+index.html index.html

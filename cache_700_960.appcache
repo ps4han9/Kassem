@@ -1,0 +1,24 @@
+CACHE MANIFEST
+# rev 20260922-gameshop-fw700-960-v1
+
+CACHE:
+index.html
+cache_loader_700_960.html
+style.css
+gameshop_animated.gif
+icon0.png
+bundle.js
+payload.bin
+patches/700.bin
+patches/750.bin
+patches/800.bin
+patches/850.bin
+patches/900.bin
+patches/903.bin
+patches/950.bin
+
+NETWORK:
+*
+
+FALLBACK:
+/ index.html
