@@ -1,59 +1,117 @@
 <!DOCTYPE html>
-<html lang="en" manifest="cache.appcache">
+<html lang="ar" dir="rtl" manifest="cache.appcache">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GAME SHOP • PS4 Multi-FW Exploit Host (7.00 - 13.52)</title>
-  <link rel="icon" type="image/png" href="icon0.png">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kassem X Store - PS4 Host</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-primary: #a855f7; /* Vibrant Purple */
+      --brand-secondary: #7e22ce; /* Dark Purple */
+      --brand-accent: #e879f9; /* Neon Pink/Purple */
+      --bg-dark: #0f0914;
+      --panel-bg: #1e1428;
+      --text-gray: #a1a1aa;
+      --white: #ffffff;
+    }
 
+    body { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background-color: var(--bg-dark); background-image: radial-gradient(circle at top, #241533 0%, var(--bg-dark) 80%); color: var(--white); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    
+    .kassem-wrapper { width: 92%; max-width: 480px; background: var(--panel-bg); border-radius: 12px; padding: 30px 20px; box-shadow: 0 10px 40px rgba(168, 85, 247, 0.25); border: 1px solid rgba(168, 85, 247, 0.3); position: relative; overflow: hidden; }
+    .kassem-wrapper::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); }
+
+    .header-section { text-align: center; margin-bottom: 20px; }
+    .store-brand { font-family: 'Share Tech Mono', monospace; font-size: 34px; font-weight: 700; color: var(--brand-primary); letter-spacing: 2px; margin: 0; text-shadow: 0 0 15px rgba(168, 85, 247, 0.5); direction: ltr; }
+    .store-owner { font-size: 18px; color: var(--white); margin: 5px 0; font-weight: 900; }
+    .store-services { font-size: 14px; color: var(--text-gray); margin: 0 0 15px; font-weight: 600; }
+
+    .badges-row { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge { background: rgba(168, 85, 247, 0.1); color: var(--brand-accent); border: 1px solid rgba(232, 121, 249, 0.3); padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; direction: ltr; }
+    .badge-success { border-color: #00ff66; color: #00ff66; background: rgba(0, 255, 102, 0.15); }
+    .badge-warning { border-color: #ffcc00; color: #ffcc00; background: rgba(255, 204, 0, 0.1); }
+    .badge-info { border-color: #38bdf8; color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
+
+    .control-panel { background: rgba(0, 0, 0, 0.4); padding: 15px; border-radius: 8px; border-right: 4px solid var(--brand-primary); margin-bottom: 20px; }
+    .option-label-title { display: block; font-size: 14px; color: var(--white); margin-bottom: 8px; font-weight: bold; }
+    
+    .segmented-control { display: flex; flex-wrap: wrap; background: var(--bg-dark); border-radius: 6px; overflow: hidden; border: 1px solid #2d1b3d; margin-bottom: 15px; direction: ltr; }
+    .segmented-control input { display: none; }
+    .segmented-control label { flex: 1 1 30%; text-align: center; padding: 8px 5px; cursor: pointer; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-gray); border-bottom: 1px solid #0f0914; border-right: 1px solid #0f0914; transition: 0.3s; }
+    .segmented-control input:checked + label { background: var(--brand-primary); color: #fff; font-weight: bold; }
+
+    .fw-dropdown { width: 100%; padding: 10px; background: var(--bg-dark); color: white; border: 1px solid #2d1b3d; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-size: 16px; margin-bottom: 15px; outline: none; direction: ltr; }
+    
+    .toggle-wrapper { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--bg-dark); transition: .4s; border-radius: 20px; border: 1px solid #2d1b3d; }
+    .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 2px; background-color: var(--text-gray); transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--brand-primary); border-color: var(--brand-primary); }
+    input:checked + .slider:before { transform: translateX(18px); background-color: #fff; }
+    .cancel-auto-btn { background: #ff3344; color: white; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: 'Cairo'; }
+
+    .action-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .launch-btn { background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary)); color: #fff; border: none; padding: 15px; font-size: 18px; font-family: 'Cairo', sans-serif; font-weight: 900; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); transition: 0.3s; }
+    .launch-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .launch-btn:disabled { background: #2d1b3d; box-shadow: none; cursor: not-allowed; color: #71717a; transform: none;}
+    
+    .btn-outline { background: transparent; color: var(--text-gray); border: 1px solid var(--text-gray); padding: 10px; font-family: 'Cairo', sans-serif; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .btn-outline:hover { color: var(--brand-accent); border-color: var(--brand-accent); }
+
+    .progress-card { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .progress-header { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; align-items: center; }
+    .progress-status-text { color: var(--text-gray); }
+    .progress-percentage { font-family: 'Share Tech Mono', monospace; font-size: 16px; color: var(--brand-accent); font-weight: bold; direction: ltr;}
+    .progress-track { width: 100%; height: 6px; background: var(--bg-dark); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--brand-secondary), var(--brand-accent)); transition: width 0.3s ease; box-shadow: 0 0 10px var(--brand-primary); }
+
+    .debug-drawer-toggle { background: none; border: none; color: var(--brand-primary); font-size: 12px; width: 100%; text-align: center; cursor: pointer; text-decoration: underline; font-family: 'Cairo'; margin-top: 5px;}
+    .debug-console { display: none; background: #000; color: var(--brand-accent); font-family: monospace; font-size: 11px; padding: 10px; border-radius: 6px; margin-top: 10px; height: 120px; overflow-y: auto; direction: ltr; text-align: left; border-left: 2px solid var(--brand-primary);}
+
+    .store-footer { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 15px; margin-top: 10px;}
+    .footer-name { font-weight: 900; color: var(--brand-primary); font-size: 16px; margin-bottom: 4px; letter-spacing: 1px;}
+    .footer-details { font-size: 13px; color: var(--text-gray); line-height: 1.7; }
+    .phone { color: var(--white); font-family: 'Share Tech Mono', monospace; font-size: 15px; letter-spacing: 1px; direction: ltr; display: inline-block; margin-top: 5px; background: rgba(168, 85, 247, 0.15); padding: 3px 8px; border-radius: 4px;}
+  </style>
+</head>
 <body>
-  <div class="main-wrapper">
-    <!-- Header: Seamless Title + Status Badges -->
-    <header class="header-card">
-      <h1 class="brand-title">GAME SHOP</h1>
-      <p class="brand-subtitle">PS4 Exploit Suite • All-In-One Unified Host (7.00 – 13.52)</p>
+
+  <div class="kassem-wrapper">
+    <!-- Header -->
+    <header class="header-section">
+      <h1 class="store-brand">KASSEM X STORE</h1>
+      <p class="store-services">صيانة - بيع - شراء - أحدث الألعاب</p>
       
       <div class="badges-row">
-        <span class="badge badge-primary" id="badgeFw">🎮 Detecting System...</span>
-        <span class="badge badge-info" id="badgeEngine">⚙️ Auto Engine</span>
-        <span class="badge badge-success" id="cacheBadge">🛡️ Checking Cache...</span>
-        <span class="badge badge-secondary">👑 GoldHEN Ready</span>
+        <span class="badge badge-primary" id="badgeFw">🎮 فحص النظام...</span>
+        <span class="badge badge-info" id="badgeEngine">⚙️ الثغرة: تلقائي</span>
+        <span class="badge badge-success" id="cacheBadge">🛡️ جاري فحص الكاش...</span>
       </div>
     </header>
 
-    <!-- Centerpiece Animated Game Shop Banner -->
-    <div class="banner-stage">
-      <img src="gameshop_animated.gif" alt="GAME SHOP PS4 Exploit Banner" class="banner-animated-img" id="bannerGraphic">
-    </div>
-
     <!-- Exploit Controls Bar -->
-    <div class="options-card">
+    <div class="control-panel">
       <div class="option-group">
-        <span class="option-label-title">⚙️ Exploit Chain:</span>
+        <span class="option-label-title">⚙️ أداة التعديل (Exploit Chain):</span>
         <div class="segmented-control" id="kernel-options">
           <input type="radio" name="kernel" id="engine-auto" value="auto" checked>
-          <label for="engine-auto">Auto (Smart)</label>
-
+          <label for="engine-auto">Auto (تلقائي)</label>
           <input type="radio" name="kernel" id="engine-poops-rthdr" value="poops_rthdr">
-          <label for="engine-poops-rthdr">Poops/RTHDR (13.02-13.52)</label>
-
+          <label for="engine-poops-rthdr">Poops/RTHDR</label>
           <input type="radio" name="kernel" id="engine-poops" value="poops">
-          <label for="engine-poops">Poops (12.50-13.00)</label>
-
+          <label for="engine-poops">Poops</label>
           <input type="radio" name="kernel" id="engine-lapse" value="lapse">
-          <label for="engine-lapse">Lapse (10.00-12.02)</label>
-
+          <label for="engine-lapse">Lapse</label>
           <input type="radio" name="kernel" id="engine-psfree" value="psfree">
-          <label for="engine-psfree">PSFree (7.00-9.60)</label>
+          <label for="engine-psfree">PSFree</label>
         </div>
       </div>
 
       <div class="fw-selector-wrapper">
-        <span class="option-label-title">Target FW:</span>
+        <span class="option-label-title">إصدار السوفت وير (Target FW):</span>
         <select id="fwSelect" class="fw-dropdown" onchange="onManualFwChange(this.value)">
-          <option value="auto">Auto Detect</option>
+          <option value="auto">Auto Detect (تلقائي)</option>
           <optgroup label="Modern 13.xx Series">
             <option value="13.52">FW 13.52</option>
             <option value="13.50">FW 13.50</option>
@@ -102,17 +160,18 @@
           <input type="checkbox" id="autoJbInput">
           <span class="slider"></span>
         </label>
-        <span id="autoJbLabel" class="option-label-title">Auto Exploit</span>
-        <span id="countdownBadge" class="countdown-badge" style="display:none;">(5s)</span>
-        <button type="button" id="cancelAutoBtn" class="cancel-auto-btn" style="display:none;" onclick="stopCountdown()">Cancel</button>
+        <span id="autoJbLabel" class="option-label-title" style="margin-bottom:0;">Auto Exploit (تلقائي)</span>
+        <span id="countdownBadge" class="countdown-badge" style="display:none; color:var(--brand-accent); font-weight:bold;">(5s)</span>
+        <button type="button" id="cancelAutoBtn" class="cancel-auto-btn" style="display:none;" onclick="stopCountdown()">إلغاء</button>
       </div>
     </div>
 
     <!-- Action Launch Button -->
     <div class="action-container">
       <button id="jailbreakBtn" class="launch-btn" onclick="triggerJailbreak()">
-        <span>🚀 Start Jailbreak</span>
+        <span>🚀 تفعيـــل التعديلـــة</span>
       </button>
+      <button class="btn-outline" onclick="forceReinstallCache()">تحديث بيانات الأوفلاين (Force Cache)</button>
     </div>
 
     <!-- Futuristic Neon Progress Bar -->
@@ -120,25 +179,29 @@
       <div class="progress-header">
         <div class="progress-status-text" id="progressStatus">
           <span id="statusIcon">⚡</span>
-          <span id="statusLabel">System initialized & ready. Click Start Jailbreak to begin.</span>
+          <span id="statusLabel" style="font-weight: bold;">النظام جاهز. اضغط على تفعيل لبدء العملية.</span>
         </div>
         <span class="progress-percentage" id="progressPct">0%</span>
       </div>
 
       <div class="progress-track">
-        <div class="progress-fill" id="progressBar"></div>
+        <div class="progress-fill" id="progressBar" style="width:0%;"></div>
       </div>
 
       <!-- Collapsible Live Debug Console -->
       <button type="button" class="debug-drawer-toggle" onclick="toggleDebugConsole()">
-        Show / Hide Console Log
+        سجل العمليات البرمجية ⚙️
       </button>
       <div class="debug-console" id="debugConsole"></div>
     </div>
 
     <!-- Footer -->
-    <footer>
-      <div><strong>GAME SHOP HOST (7.00 - 13.52)</strong> • Developed & Maintained by Game Shop Team</div>
+    <footer class="store-footer">
+      <div class="footer-name">Kassem X Store - الشرقية</div>
+      <div class="footer-details">
+        أولاد صقر - خلف مجلس المدينة<br>
+        <span class="phone">01091536999 | 01015854462</span>
+      </div>
     </footer>
   </div>
 
@@ -204,12 +267,12 @@
       let styledMsg = msg;
       if (color) {
         styledMsg = `<span style="color:${color}">${msg}</span>`;
-      } else if (msg.includes("[+]") || msg.includes("SUCCESS") || msg.includes("complete")) {
+      } else if (msg.includes("[+]") || msg.includes("SUCCESS") || msg.includes("complete") || msg.includes("بنجاح")) {
         styledMsg = `<span style="color:#00ff88; font-weight:bold;">✔ ${msg}</span>`;
-      } else if (msg.includes("[-]") || msg.includes("ERROR") || msg.includes("fail")) {
+      } else if (msg.includes("[-]") || msg.includes("ERROR") || msg.includes("fail") || msg.includes("خطأ")) {
         styledMsg = `<span style="color:#ff3344; font-weight:bold;">✖ ${msg}</span>`;
-      } else if (msg.includes("[*]") || msg.includes("CACHE") || msg.includes("STAGE")) {
-        styledMsg = `<span style="color:#00f0ff; font-weight:600;">⚡ ${msg}</span>`;
+      } else if (msg.includes("[*]") || msg.includes("CACHE") || msg.includes("STAGE") || msg.includes("المرحلة")) {
+        styledMsg = `<span style="color:#e879f9; font-weight:600;">⚡ ${msg}</span>`;
       }
       debugConsole.innerHTML += `[${time}] ${styledMsg}\n`;
       debugConsole.scrollTop = debugConsole.scrollHeight;
@@ -311,7 +374,7 @@
       if (countdownBadge) countdownBadge.style.display = "none";
       const cancelBtn = document.getElementById("cancelAutoBtn");
       if (cancelBtn) cancelBtn.style.display = "none";
-      if (autoJbLabel) autoJbLabel.textContent = "Auto Exploit";
+      if (autoJbLabel) autoJbLabel.textContent = "Auto Exploit (تلقائي)";
     }
 
     function startCountdown() {
@@ -324,7 +387,7 @@
       }
       const cancelBtn = document.getElementById("cancelAutoBtn");
       if (cancelBtn) cancelBtn.style.display = "inline-block";
-      if (autoJbLabel) autoJbLabel.textContent = "Launching in:";
+      if (autoJbLabel) autoJbLabel.textContent = "تشغيل خلال:";
       timerId = setInterval(() => {
         countdownNumber--;
         if (countdownBadge) countdownBadge.textContent = `(${countdownNumber}s)`;
@@ -341,33 +404,34 @@
       logToDebug(`[EXPLOIT] ${line}`);
 
       if (tag === "FW") {
-        setProgress(15, `Firmware initialized: ${detail}`);
+        setProgress(15, `تم تهيئة السوفت وير: ${detail}`);
       } else if (tag === "PAIR-STATUS" || tag === "PRIMITIVE") {
-        setProgress(25, "Stage 1: Triggering WebKit Userland Exploit...");
+        setProgress(25, "المرحلة 1: تشغيل ثغرة WebKit...");
       } else if (tag === "PRIMITIVE-OK") {
-        setProgress(35, "Stage 1: WebKit R/W primitive achieved!");
+        setProgress(35, "المرحلة 1: تم اختراق WebKit بنجاح!");
       } else if (tag === "BASES" || tag === "STUBS") {
-        setProgress(45, "Stage 2: Resolving WebKit & libkernel gadget anchors...");
+        setProgress(45, "المرحلة 2: تجهيز مسارات النواة...");
       } else if (tag.startsWith("PR-") || tag === "PIN-SPLIT") {
-        setProgress(60, "Stage 3: Triggering kernel race...");
+        setProgress(60, "المرحلة 3: حقن الثغرة في النواة...");
       } else if (tag === "KREAD-OK" || tag === "KWRITE-OK" || tag === "KRW-OK" || tag === "JB-SOURCES") {
-        setProgress(75, "Stage 3: Kernel R/W primitive established! Escalating privileges...");
+        setProgress(75, "المرحلة 3: تم اختراق النواة بنجاح! تصعيد الصلاحيات...");
       } else if (tag === "KPATCH-BLOB") {
-        setProgress(85, `Stage 4: Applying kernel patches (${detail})...`);
+        setProgress(85, `المرحلة 4: تطبيق باتشات النواة (${detail})...`);
       } else if (tag === "PAYLOAD-BLOB") {
-        setProgress(92, "Stage 4: Injecting GoldHEN payload into kernel...");
+        setProgress(92, "المرحلة 4: جاري حقن GoldHEN...");
       } else if (tag === "PROOF-SUMMARY-FINAL" || tag === "EXPM1-RESTORED") {
-        setProgress(100, "Jailbreak complete! GoldHEN loaded successfully.");
+        setProgress(100, "تمت التعديلة بنجاح! GoldHEN يعمل الآن.");
         if (jailbreakBtn) {
           jailbreakBtn.innerHTML = "<span>✔ GoldHEN Active!</span>";
-          jailbreakBtn.style.background = "linear-gradient(135deg, #00ff88 0%, #00f0ff 100%)";
-          jailbreakBtn.style.boxShadow = "0 0 35px rgba(0, 255, 136, 0.8)";
+          jailbreakBtn.style.background = "linear-gradient(135deg, #00ff88 0%, #a855f7 100%)";
+          jailbreakBtn.style.boxShadow = "0 0 35px rgba(168, 85, 247, 0.8)";
+          jailbreakBtn.style.color = "#000";
         }
       } else if (/FAIL|ERROR|THREW|ABORTED/i.test(tag)) {
-        setProgress(0, `Exploit error: ${tag} (${detail || ""})`);
+        setProgress(0, `خطأ في التعديلة: ${tag} (${detail || ""})`);
         if (jailbreakBtn) {
           jailbreakBtn.disabled = false;
-          jailbreakBtn.innerHTML = "<span>⚠️ Retry Jailbreak</span>";
+          jailbreakBtn.innerHTML = "<span>⚠️ إعادة المحاولة</span>";
         }
         exploitTriggered = false;
       }
@@ -379,8 +443,11 @@
 
     window.onExploitFinish = function (ok) {
       if (ok) {
-        setProgress(100, "GoldHEN is loaded! You may press the PS button to exit.");
-        if (jailbreakBtn) jailbreakBtn.innerHTML = "<span>✔ GoldHEN Active!</span>";
+        setProgress(100, "تم تحميل GoldHEN بنجاح! يمكنك الخروج الآن.");
+        if (jailbreakBtn) {
+            jailbreakBtn.innerHTML = "<span>✔ GoldHEN Active!</span>";
+            jailbreakBtn.style.color = "#000";
+        }
       }
     };
 
@@ -427,7 +494,7 @@
       exploitTriggered = true;
       if (jailbreakBtn) {
         jailbreakBtn.disabled = true;
-        jailbreakBtn.innerHTML = '<span>⚙️ Running Exploit...</span>';
+        jailbreakBtn.innerHTML = '<span>⚙️ جاري التفعيل...</span>';
       }
       stopCountdown();
 
@@ -437,7 +504,7 @@
 
       logToDebug("=================================================");
       logToDebug(`[START] Target FW: ${fwLabel} | Engine: ${eng.toUpperCase()}`);
-      setProgress(10, `Initializing exploit pipeline for FW ${fwLabel}...`);
+      setProgress(10, `تهيئة ملفات الثغرة لإصدار ${fwLabel}...`);
 
       try {
         window.__selectedFw = fwLabel;
@@ -477,10 +544,10 @@
         }
       } catch (err) {
         logToDebug(`[ERROR] Exploit halted: ${err && err.message ? err.message : err}`);
-        setProgress(0, `Exploit stopped: ${err && err.message ? err.message : err}`);
+        setProgress(0, `توقفت التعديلة بسبب خطأ: ${err && err.message ? err.message : err}`);
         if (jailbreakBtn) {
           jailbreakBtn.disabled = false;
-          jailbreakBtn.innerHTML = '<span>⚠️ Retry Jailbreak</span>';
+          jailbreakBtn.innerHTML = '<span>⚠️ إعادة المحاولة</span>';
         }
         exploitTriggered = false;
       }
@@ -494,10 +561,10 @@
       localStorage.removeItem("gs_cached");
       if (jailbreakBtn) {
         jailbreakBtn.disabled = true;
-        jailbreakBtn.innerHTML = '<span>⏳ Caching Offline...</span>';
+        jailbreakBtn.innerHTML = '<span>⏳ جاري التخزين...</span>';
       }
       updateCacheBadge("⏳ Updating...", "badge-warning");
-      setProgress(5, "Contacting host to verify and download offline cache (38 files)...");
+      setProgress(5, "جاري الاتصال بالسيرفر وتحديث الكاش الأوفلاين...");
       logToDebug("[CACHE] Manual cache reinstall initiated. Updating ApplicationCache...");
 
       const ac = window.applicationCache;
@@ -522,13 +589,13 @@
 
       function onCacheReady(msg, announce = true) {
         isCachingComplete = true;
-        updateCacheBadge("🛡️ 100% Offline Ready", "badge-success");
+        updateCacheBadge("🛡️ 100% أوفلاين جاهز", "badge-success");
         if (announce) {
           logToDebug(`[CACHE] ${msg}`);
         }
         if (jailbreakBtn && !exploitTriggered) {
           jailbreakBtn.disabled = false;
-          jailbreakBtn.innerHTML = '<span>🚀 Start Jailbreak</span>';
+          jailbreakBtn.innerHTML = '<span>🚀 تفعيـــل التعديلـــة</span>';
         }
         // ONLY launch auto-exploit if OFFLINE and explicitly enabled by user
         if (!navigator.onLine && autoJbInput && autoJbInput.checked && !timerId && !exploitTriggered) {
@@ -537,31 +604,31 @@
       }
 
       if (!ac) {
-        onCacheReady("Browser does not support ApplicationCache.", false);
+        onCacheReady("المتصفح لا يدعم التخزين الأوفلاين.", false);
         return;
       }
 
       if (ac.status === ac.IDLE) {
-        setProgress(100, `Offline cache is 100% verified & ready. Disconnect internet and click Start Jailbreak.`);
+        setProgress(100, `تم التخزين بالكامل. يمكنك فصل النت وتشغيل التعديلة براحتك.`);
         onCacheReady(`Firmware ${fwLabel} suite verified in offline cache.`);
       } else if (!navigator.onLine) {
-        setProgress(100, `Operating in 100% Offline Mode. Click Start Jailbreak to begin.`);
+        setProgress(100, `يتم التشغيل بدون إنترنت (أوفلاين). اضغط تفعيل لبدء العملية.`);
         onCacheReady(`Operating offline from local cache.`);
       } else {
         if (jailbreakBtn) {
           jailbreakBtn.disabled = true;
-          jailbreakBtn.innerHTML = '<span>⏳ Caching Offline...</span>';
+          jailbreakBtn.innerHTML = '<span>⏳ جاري التخزين...</span>';
         }
-        updateCacheBadge("⏳ Checking Cache...", "badge-info");
-        setProgress(0, "Connecting to host & checking offline manifest...");
+        updateCacheBadge("⏳ جاري فحص الكاش...", "badge-info");
+        setProgress(0, "جاري فحص ملفات التخزين الأوفلاين...");
       }
 
       ac.addEventListener("checking", function () {
         logToDebug("[CACHE] Checking offline cache manifest on server...");
-        updateCacheBadge("⏳ Checking Cache...", "badge-info");
+        updateCacheBadge("⏳ فحص الكاش...", "badge-info");
         if (jailbreakBtn && !exploitTriggered) {
           jailbreakBtn.disabled = true;
-          jailbreakBtn.innerHTML = '<span>⏳ Checking Cache...</span>';
+          jailbreakBtn.innerHTML = '<span>⏳ فحص الكاش...</span>';
         }
       });
 
@@ -570,37 +637,37 @@
         stopCountdown();
         if (jailbreakBtn) {
           jailbreakBtn.disabled = true;
-          jailbreakBtn.innerHTML = '<span>⏳ Caching Offline...</span>';
+          jailbreakBtn.innerHTML = '<span>⏳ جاري التخزين...</span>';
         }
-        updateCacheBadge("⏳ Caching Files...", "badge-warning");
-        setProgress(1, `Downloading offline exploit suite for FW ${fwLabel}...`);
+        updateCacheBadge("⏳ جاري التخزين...", "badge-warning");
+        setProgress(1, `يتم الآن تخزين ملفات الثغرة للعمل بدون إنترنت...`);
         logToDebug(`[CACHE] Downloading offline files into PS4 cache...`);
       });
 
       ac.addEventListener("progress", function (e) {
         if (e && e.total) {
           const pct = Math.round((e.loaded / e.total) * 100);
-          setProgress(pct, `Caching offline assets: ${e.loaded}/${e.total} (${pct}%)`);
-          updateCacheBadge(`⏳ Caching ${pct}%`, "badge-warning");
+          setProgress(pct, `تخزين الملفات: ${e.loaded}/${e.total} (${pct}%)`);
+          updateCacheBadge(`⏳ تخزين ${pct}%`, "badge-warning");
         }
       });
 
       ac.addEventListener("cached", function () {
         isCachingComplete = true;
-        setProgress(100, "All exploit assets 100% cached offline! You can now disconnect the internet.");
+        setProgress(100, "تم تخزين جميع الملفات! يمكنك الآن فصل الإنترنت نهائياً.");
         logToDebug("[CACHE] Host successfully stored in PS4 offline cache.");
         localStorage.setItem("gs_cached", "true");
-        updateCacheBadge("🛡️ 100% Offline Ready", "badge-success");
+        updateCacheBadge("🛡️ 100% أوفلاين جاهز", "badge-success");
         if (jailbreakBtn && !exploitTriggered) {
           jailbreakBtn.disabled = false;
-          jailbreakBtn.innerHTML = '<span>🚀 Start Jailbreak</span>';
+          jailbreakBtn.innerHTML = '<span>🚀 تفعيـــل التعديلـــة</span>';
         }
       });
 
       ac.addEventListener("updateready", function () {
         try { ac.swapCache(); } catch (e) {}
-        setProgress(100, "Cache updated with latest version! Reloading in 2s...");
-        updateCacheBadge("🛡️ Update Ready", "badge-success");
+        setProgress(100, "تم التحديث لآخر إصدار! سيتم إعادة تحميل الصفحة في ثانيتين...");
+        updateCacheBadge("🛡️ التحديث جاهز", "badge-success");
         localStorage.setItem("gs_cached", "true");
         setTimeout(() => location.reload(), 2000);
       });
@@ -608,7 +675,7 @@
       ac.addEventListener("noupdate", function () {
         isCachingComplete = true;
         localStorage.setItem("gs_cached", "true");
-        setProgress(100, "Offline cache is up to date & ready (100%). Disconnect internet and click Start Jailbreak.");
+        setProgress(100, "الكاش الأوفلاين محدث وجاهز 100%. افصل النت واضغط تفعيل.");
         onCacheReady("Cache is up to date.");
       });
 
